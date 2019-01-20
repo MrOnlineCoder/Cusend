@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Include">
+      <UniqueIdentifier>{f0b8072e-69b2-4403-85c7-32e1efff3afa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Platform">
+      <UniqueIdentifier>{19027d9f-9400-4be3-b0e5-50e804663f68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Core">
+      <UniqueIdentifier>{a35c95bf-718e-471b-a884-7dd220084a12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{4eb24ad1-dcc7-488e-9bdb-0709bf4fe6c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core">
+      <UniqueIdentifier>{75f599ef-8460-4abb-9601-f26f4b94f278}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Platform">
+      <UniqueIdentifier>{59c39ff4-ac37-4436-8e0e-2d316829b232}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Http">
+      <UniqueIdentifier>{66a5e94d-8f6b-470f-9151-593a613eb87d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Http">
+      <UniqueIdentifier>{7eae7455-3dcf-4ebc-bf5b-63533b60359a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Cusend\Main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cusend\Application.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cusend\Platform\PlatformWin32.cpp">
+      <Filter>Source\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cusend\Http\Server.cpp">
+      <Filter>Source\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cusend\Http\Request.cpp">
+      <Filter>Source\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cusend\Core\Memory.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cusend\Http\RequestParser.cpp">
+      <Filter>Source\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cusend\Core\Common.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cusend\Http\Response.cpp">
+      <Filter>Source\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cusend\Http\ResponseFactory.cpp">
+      <Filter>Source\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cusend\Http\Router.cpp">
+      <Filter>Source\Http</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\Cusend\Application.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Cusend\Core\Common.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Cusend\Core\Error.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Cusend\Platform\Platform.h">
+      <Filter>Include\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Cusend\Http\Request.h">
+      <Filter>Include\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Cusend\Http\Server.h">
+      <Filter>Include\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Cusend\Http\RequestParser.h">
+      <Filter>Include\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Cusend\Core\Memory.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Cusend\Http\Response.h">
+      <Filter>Include\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Cusend\Http\ResponseFactory.h">
+      <Filter>Include\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Cusend\Http\Router.h">
+      <Filter>Include\Http</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="LICENSE" />
+  </ItemGroup>
+</Project>
