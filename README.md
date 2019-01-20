@@ -7,7 +7,7 @@ Cusend (*C plUS plUS back-END*) is a lightweight C++ library for building Web AP
 #include <Cusend/Application.h>
 
 bool helloRoute(csd::Request& req, csd::Response& res) {
-	return csd::ResponseFactory::text("Hello World!");
+	return csd::ResponseFactory::text(res, "Hello World!");
 }
 
 int main(int argc, char* argv[]) {
