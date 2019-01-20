@@ -1,6 +1,6 @@
 # Cusend
 
-Cusend is a lightweight C++ library for building Web APIs. It's idea is inspired by [crow](https://github.com/ipkn/crow) and the API style is inspired by [express](https://github.com/expressjs/express).
+Cusend (*C plUS plUS back-END*) is a lightweight C++ library for building Web APIs. The idea is inspired by [crow](https://github.com/ipkn/crow) and the API style is inspired by [express](https://github.com/expressjs/express).
 
 ## Hello World example
 ```cpp
