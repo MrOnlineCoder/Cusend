@@ -18,7 +18,7 @@
 namespace csd {
 	typedef std::unordered_map<std::string, std::string> RequestMap;
 
-	/*
+	/**
 	* \brief Helper constants for HTTP methods
 	*/
 	namespace Methods {
@@ -28,7 +28,7 @@ namespace csd {
 		const std::string Delete = "DELETE";
 	};
 
-	/*
+	/**
 	* \brief Class which represents a single request from a HTTP client
 	*/
 	class Request {
@@ -41,7 +41,7 @@ namespace csd {
 		RequestMap m_headers; /*!< Map of HTTP headers. Use getHeader() method to receive header's value*/
 		RequestMap m_fields; /*!< Map of fields. In GET requests this corresponds to the query string params. In POST it corresponds to the POST-body params*/
 
-		/*
+		/**
 		* \brief Get value of a header
 		* Returns value of a HTTP header. 
 		* \param name Name of the header (e.g "User-Agent"). Case-insensitive ("user-Agent", "uSeR-AgEnT" are the same)
@@ -49,7 +49,7 @@ namespace csd {
 		*/
 		std::string getHeader(std::string name); 
 
-		/*
+		/**
 		* \brief Get value of a field
 		* In GET requests fields are parsed from the query string
 		* In POST requests fields are parsed from POST-body
@@ -58,7 +58,7 @@ namespace csd {
 		*/
 		std::string getField(const std::string& key);
 
-		/*
+		/**
 		* \brief Get request path
 		* Path is the URL without query parameters. 
 		* /main/control?action=edit&type=post&id=1 is the full URL
