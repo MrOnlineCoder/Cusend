@@ -27,7 +27,8 @@ Browsing to localhost:3000/hello in your favourite browser will show "Hello Worl
 * Uses multi-threading for handling connections
 
 ## TODO
-* GET and POST params parsing
+* ~~GET params parsing~~
+* POST params parsing
 * URI params parsing (e.g. GET /article/:articleID)
 * Cookie management
 * Cache

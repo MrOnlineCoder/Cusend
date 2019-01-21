@@ -28,6 +28,10 @@ namespace csd {
 	private:
 		bool parseRequestLine(csd::Request& target);
 		bool parseHeaders(csd::Request& target);
+		bool parseGetParams(csd::Request& target);
+		bool parsePostBody(csd::Request& target);
+
+		void parseFields(csd::Request& target, const std::string& str);
 
 		std::vector<std::string> m_lines;
 	};

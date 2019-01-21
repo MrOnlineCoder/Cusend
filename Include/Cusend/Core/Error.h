@@ -15,11 +15,11 @@ namespace csd {
 	typedef unsigned int Error;
 
 	namespace Errors {
-		const Error None = 0;
-		const Error PlatformSocketInitFailed = 1;
-		const Error SocketCreateFailed = 2;
-		const Error BindSocketFailed = 3;
-		const Error ListenSocketFailed = 4;
+		const Error None = 0; /*!< No error, everything is fine*/
+		const Error PlatformSocketInitFailed = 1; /*!< Couldn't initialize OS socket API*/
+		const Error SocketCreateFailed = 2; /*!< Couldn't create the socket*/
+		const Error BindSocketFailed = 3; /*!< Couldn't bind the socket*/
+		const Error ListenSocketFailed = 4; /*!< Couldn't start listening the socket*/
 	}
 }
 

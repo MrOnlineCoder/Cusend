@@ -23,7 +23,7 @@ csd::Route* csd::Router::findMatchingRoute(csd::Request& req) {
 		Route& route = m_routes[i];
 
 		if (route.method != req.m_method) continue;
-		if (route.url != req.m_url) continue;
+		if (route.url != req.getPath()) continue;
 
 		return &route;
 	}

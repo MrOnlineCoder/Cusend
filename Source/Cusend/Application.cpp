@@ -13,6 +13,7 @@
 #include <Cusend/Platform/Platform.h>
 #include <Cusend/Core/Memory.h>
 
+
 csd::Application* csd::Application::instance = NULL;
 
 csd::Application::Application() {

@@ -3,13 +3,24 @@
 #include <iostream>
 
 bool helloRoute(csd::Request& req, csd::Response& res) {
+	if (req.getField("name") != "") {
+		return csd::ResponseFactory::text(res, "Hello, "+req.getField("name"));
+	}
+
 	return csd::ResponseFactory::sendFile(res, "Static/hello.css");
+}
+
+bool faviconRoute(csd::Request& req, csd::Response& res) {
+	res.setStatus(304);
+
+	return true;
 }
 
 int main(int argc, char* argv[]) {
 	csd::Application app;
 
 	app.route(csd::Methods::Get, "/hello", helloRoute);
+	app.route(csd::Methods::Get, "/favicon.ico", faviconRoute);
 
 	app.listen(3000);
 
