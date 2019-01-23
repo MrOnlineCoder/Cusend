@@ -31,6 +31,8 @@ namespace csd {
 		bool parseGetParams(csd::Request& target);
 		bool parsePostBody(csd::Request& target);
 
+		void parseUrlEncodedBody(csd::Request& target);
+
 		void parseFields(csd::Request& target, const std::string& str);
 
 		std::vector<std::string> m_lines;

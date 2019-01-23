@@ -28,11 +28,13 @@ Browsing to localhost:3000/hello in your favourite browser will show "Hello Worl
 
 ## TODO
 * ~~GET params parsing~~
-* POST params parsing
+* ~~POST params parsing~~
+* URL encoding/decoding
+* multipart/form-data POST body parsing
 * URI params parsing (e.g. GET /article/:articleID)
 * Cookie management
 * Cache
-* Add documentation and doxygen
+* ~~Add documentation and doxygen~~
 * Support as many MIME-types as possible
 * Middleware routing
 * Error-prone request parser

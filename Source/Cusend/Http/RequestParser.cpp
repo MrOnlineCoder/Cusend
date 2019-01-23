@@ -25,17 +25,29 @@ bool csd::RequestParser::parse(csd::Buffer & data, csd::Request & target) {
 	//Splitting the whole buffer into std::strings
 	std::string line = "";
 
+	bool prevNewline = false;
+
 	for (std::size_t i = 0; i < data.usedSize; i++) {
 
 		if (data.data[i] == '\r') {
-			i ++;
+			i++;
 			m_lines.push_back(line);
 			line = "";
+
+			if (prevNewline == true) {
+				m_lines.push_back("\r\n");
+				prevNewline = false;
+			}
+
+			prevNewline = true;
 			continue;
 		}
 
 		line += data.data[i];
+		prevNewline = false;
 	}
+
+	m_lines.push_back(line);
 
 	if (m_lines.size() == 0) return false;
 
@@ -98,7 +110,9 @@ bool csd::RequestParser::parseRequestLine(csd::Request & target) {
 
 bool csd::RequestParser::parseHeaders(csd::Request& target) {
 	for (std::size_t idx = 1; idx < m_lines.size(); idx++) {
-		if (m_lines[idx] == "\r\n") break;
+		if (m_lines[idx][0] == '\r' && m_lines[idx][1] == '\n') {
+			break;
+		}
 
 		std::string line = m_lines[idx];
 
@@ -108,7 +122,7 @@ bool csd::RequestParser::parseHeaders(csd::Request& target) {
 		bool isNameParsed = false;
 
 		for (std::size_t li = 0; li < line.length(); li++) {
-			if (line[li] == ':') {
+			if (line[li] == ':' && !isNameParsed) {
 				isNameParsed = true;
 				li++;
 				continue;
@@ -117,6 +131,8 @@ bool csd::RequestParser::parseHeaders(csd::Request& target) {
 			if (!isNameParsed) {
 				name += line[li];
 			} else {
+				if (value.size() == 0 && line[li] == ' ') continue;
+
 				value += line[li];
 			}
 		}
@@ -149,7 +165,28 @@ bool csd::RequestParser::parseGetParams(csd::Request & target) {
 }
 
 bool csd::RequestParser::parsePostBody(csd::Request & target) {
+	if (target.getHeader("Content-Type") == "application/x-www-form-urlencoded") {
+		parseUrlEncodedBody(target);
+		return true;
+	}
+
+	//TODO: implement multipart/form-data parsing
 	return false;
+}
+
+void csd::RequestParser::parseUrlEncodedBody(csd::Request& target) {
+	std::size_t idx = 1;
+
+	for (; idx < m_lines.size(); idx++) {
+		if (m_lines[idx] == "\r\n") break;
+	}
+
+	//At this point idx will point to \r\n line between headers and body
+	idx++;
+
+	if (idx < m_lines.size()) {
+		parseFields(target, m_lines[idx]);
+	}
 }
 
 /*

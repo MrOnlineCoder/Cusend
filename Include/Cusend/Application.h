@@ -25,7 +25,7 @@ namespace csd {
 	/**
 	* \brief Size for a buffer, which is used to recv() request data into
 	*/
-	const static int REQUEST_BUFFER_SIZE = 1024;
+	const static int REQUEST_BUFFER_SIZE = 2048;
 
 	/**
 	* \brief Main Cusend framework class

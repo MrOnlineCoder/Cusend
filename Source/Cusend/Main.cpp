@@ -10,6 +10,14 @@ bool helloRoute(csd::Request& req, csd::Response& res) {
 	return csd::ResponseFactory::sendFile(res, "Static/hello.css");
 }
 
+bool getFormRoute(csd::Request& req, csd::Response& res) {
+	return csd::ResponseFactory::sendFile(res, "Static/form.html");
+}
+
+bool postFormRoute(csd::Request& req, csd::Response& res) {
+	return csd::ResponseFactory::text(res, req.getField("name")+", your text: "+req.getField("text"));
+}
+
 bool faviconRoute(csd::Request& req, csd::Response& res) {
 	res.setStatus(304);
 
@@ -20,6 +28,8 @@ int main(int argc, char* argv[]) {
 	csd::Application app;
 
 	app.route(csd::Methods::Get, "/hello", helloRoute);
+	app.route(csd::Methods::Get, "/form", getFormRoute);
+	app.route(csd::Methods::Post, "/form", postFormRoute);
 	app.route(csd::Methods::Get, "/favicon.ico", faviconRoute);
 
 	app.listen(3000);
