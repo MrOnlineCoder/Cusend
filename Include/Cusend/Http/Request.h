@@ -40,6 +40,7 @@ namespace csd {
 
 		RequestMap m_headers; /*!< Map of HTTP headers. Use getHeader() method to receive header's value*/
 		RequestMap m_fields; /*!< Map of fields. In GET requests this corresponds to the query string params. In POST it corresponds to the POST-body params*/
+		RequestMap m_cookies; /*!< Map of fields. In GET requests this corresponds to the query string params. In POST it corresponds to the POST-body params*/
 
 		/**
 		* \brief Get value of a header
@@ -65,6 +66,14 @@ namespace csd {
 		* /main/control is the path
 		*/
 		std::string getPath();
+
+		/**
+		* \brief Get cookie
+		* \param name Cookie name
+		* \return cookie value, or "" (empty string) if no cookie is found
+		*/
+
+		std::string getCookie(const std::string& name);
 	};
 }
 

@@ -65,13 +65,20 @@ namespace csd {
 		*/
 		void setVersion(int ver);
 
+		/**
+		* \brief Sets HTTP cookie
+		* \param name Cookie name
+		* \param value Cookie value
+		* \param age (optional) Sets Max-Age property - number of seconds until the cookie expires.
+		* \param httpOnly (optional) HTTP-only cookies aren't accessible via JavaScript
+		*/
+		void setCookie(const std::string& name, const std::string& value, long age=0L, bool httpOnly=false);
+
 		/*
 		* \brief Generates response and fills the buffer with the response data
 		* User doesn't need to use this method at all, it is more for internal usage.
 		*/
 		void generate(csd::Buffer& target);
-
-		std::size_t computeResponseSize();
 
 		std::size_t getBodySize();
 

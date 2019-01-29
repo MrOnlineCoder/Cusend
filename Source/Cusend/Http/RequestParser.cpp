@@ -54,6 +54,8 @@ bool csd::RequestParser::parse(csd::Buffer & data, csd::Request & target) {
 	if (!parseRequestLine(target)) return false;
 	if (!parseHeaders(target)) return false;
 
+	parseCookies(target);
+
 	if (target.m_method == csd::Methods::Get) {
 		parseGetParams(target);
 	} else if (target.m_method == csd::Methods::Post)  {
@@ -223,4 +225,45 @@ void csd::RequestParser::parseFields(csd::Request & target, const std::string & 
 	}
 
 	target.m_fields.insert(std::make_pair(field, csd::decodeURI(value)));
+}
+
+void csd::RequestParser::parseCookies(csd::Request & target) {
+	std::string cookieStr = target.getHeader("Cookie");
+
+	if (cookieStr.size() == 0) {
+		return;
+	}
+
+	//This is small hack, which pushes a ; to the end
+	//Then it is not needed to insert a pair of name,value into m_cookies map after the for loop
+	cookieStr.push_back(';'); 
+
+	bool isNameParsed = false;
+	std::string name = "";
+	std::string value = "";
+	for (std::size_t i = 0; i < cookieStr.size(); i++) {
+		char c = cookieStr[i];
+
+		if (c == '=') {
+			isNameParsed = true;
+			continue;
+		}
+
+		if (c == ';') {
+			if (i + 1 < cookieStr.size()) {
+				if (cookieStr[i + 1] == ' ') i++;
+			}
+			target.m_cookies.insert(std::make_pair(name, value));
+			name = "";
+			value = "";
+			isNameParsed = false;
+			continue;
+		}
+
+		if (isNameParsed) {
+			value.push_back(c);
+		} else {
+			name.push_back(c);
+		}
+	}
 }

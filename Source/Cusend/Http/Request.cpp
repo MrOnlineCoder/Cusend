@@ -32,3 +32,12 @@ std::string csd::Request::getPath() {
 
 	return pos == std::string::npos ? m_url : m_url.substr(0, pos);
 }
+
+
+std::string csd::Request::getCookie(const std::string & name) {
+	RequestMap::iterator it = m_cookies.find(name);
+
+	if (it == m_cookies.end()) return "";
+
+	return it->second;
+}

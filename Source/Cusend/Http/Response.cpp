@@ -93,11 +93,31 @@ void csd::Response::setVersion(int ver) {
 	m_version = ver;
 }
 
+void csd::Response::setCookie(const std::string & name, const std::string & value, long age, bool httpOnly) {
+	std::stringstream ss;
+
+	ss << name << "=" << value;
+
+	if (age != 0 || httpOnly) {
+		ss << "; ";
+	}
+
+	if (age != 0) {
+		ss << "Max-Age=" << age;
+		if (httpOnly) ss << "; ";
+	}
+
+	if (httpOnly) {
+		ss << "HttpOnly";
+	}
+
+	setHeader("Set-Cookie", ss.str());
+}
+
 void csd::Response::generate(csd::Buffer& target) {
 	csd::freeBuffer(&target);
 
 	setHeader("Content-Length", std::to_string(m_buffer.usedSize));
-	setHeader("Server", "Cusend/C++");
 
 	std::string response = "";
 
@@ -137,36 +157,6 @@ void csd::Response::generate(csd::Buffer& target) {
 	target.usedSize = response.size();
 }
 
-std::size_t csd::Response::computeResponseSize() {
-	std::size_t sz = 0;
-
-	//HTTP/M.m SSS msg\r\n
-	//We do not really care about content of this strings, as they will be the same in size
-	sz += std::string("HTTP/1.1").size();
-	sz++;
-	sz += std::string("200").size();
-	sz++;
-
-	sz += makeStatusMessage(m_status).size();
-	sz += 2;
-
-
-	std::unordered_map<std::string, std::string>::iterator it;
-
-	//Header: Value\r\n
-	for (it = m_headers.begin(); it != m_headers.end(); it++) {
-		sz += it->first.size();
-		sz += 2;
-		sz += it->second.size();
-		sz += 2;
-	}
-
-	sz += 2;
-
-	sz += m_buffer.usedSize;
-
-	return sz;
-}
 
 std::size_t csd::Response::getBodySize() {
 	return m_buffer.usedSize;

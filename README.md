@@ -32,8 +32,7 @@ Browsing to localhost:3000/hello in your favourite browser will show "Hello Worl
 * ~~URL encoding/decoding~~
 * multipart/form-data POST body parsing
 * URI params parsing (e.g. GET /article/:articleID)
-* Cookie management
-* Cache
+* ~~Cookie management~~
 * ~~Add documentation and doxygen~~
 * Support as many MIME-types as possible
 * ~~Middleware routing~~
@@ -41,6 +40,7 @@ Browsing to localhost:3000/hello in your favourite browser will show "Hello Worl
 * Implement platform-specifc functions for Unix/Linux
 * Create makefiles for different platforms
 * Provide precompiled binaries for Windows
+* keep-alive connections?
 
 ## Contributing
 Contributions are welcomed. If you found a bug or want to add a feature - open an issue. You can also create a pull request which fixes the bug or adds the feature respectively. Please, try to follow same code style as in the whole project. Use *express* API docs for reference.

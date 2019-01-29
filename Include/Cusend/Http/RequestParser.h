@@ -35,6 +35,8 @@ namespace csd {
 
 		void parseFields(csd::Request& target, const std::string& str);
 
+		void parseCookies(csd::Request& target);
+
 		std::vector<std::string> m_lines;
 	};
 }
