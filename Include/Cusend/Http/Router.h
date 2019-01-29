@@ -19,7 +19,8 @@
 #include <Cusend/Http/Response.h>
 
 namespace csd {
-	typedef std::function<bool(csd::Request&, csd::Response&)> RouteHandler;
+	typedef std::function<void(csd::Request&, csd::Response&)> RouteHandler;
+	typedef std::function<bool(csd::Request&, csd::Response&)> MiddlewareHandler;
 
 	struct Route {
 		std::string method;
@@ -32,10 +33,14 @@ namespace csd {
 		Router();
 
 		void addRoute(csd::Route& route);
+		void addMiddleware(csd::MiddlewareHandler& func);
+
+		bool processMiddlewares(csd::Request& req, csd::Response& res);
 
 		csd::Route* findMatchingRoute(csd::Request& req);
 	private:
 		std::vector<csd::Route> m_routes;
+		std::vector<csd::MiddlewareHandler> m_middlewares;
 	};
 }
 

@@ -53,6 +53,19 @@ namespace csd {
 		*/
 		void route(const std::string& method, const std::string& uri, RouteHandler handler);
 
+
+		/**
+		* \brief Registers new middleware for the application
+		* Middlewares are similiar to routes, except they have no method or URL associated with them.
+		* Middleware handlers are called BEFORE any routes during request processing. Each middleware handler must return a boolean value.
+		* If returned value is true, next middleware or route is called.
+		* If returned value is false, no further routes or middlewares are called and the response object is sent to the client.
+		* Middlewares are executed in the same order as they are registered using use() function.
+		*
+		* \param func Middleware function
+		*/
+		void use(MiddlewareHandler handler);
+
 		/**
 		* \brief Starts the application on given port
 		* Starts listening on given port. This function is blocking, so no code will be executed until it exits

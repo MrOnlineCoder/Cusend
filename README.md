@@ -6,8 +6,8 @@ Cusend (*C plUS plUS back-END*) is a lightweight C++ library for building Web AP
 ```cpp
 #include <Cusend/Application.h>
 
-bool helloRoute(csd::Request& req, csd::Response& res) {
-	return csd::ResponseFactory::text(res, "Hello World!");
+void helloRoute(csd::Request& req, csd::Response& res) {
+	csd::ResponseFactory::text(res, "Hello World!");
 }
 
 int main(int argc, char* argv[]) {
@@ -36,7 +36,7 @@ Browsing to localhost:3000/hello in your favourite browser will show "Hello Worl
 * Cache
 * ~~Add documentation and doxygen~~
 * Support as many MIME-types as possible
-* Middleware routing
+* ~~Middleware routing~~
 * Error-prone request parser
 * Implement platform-specifc functions for Unix/Linux
 * Create makefiles for different platforms

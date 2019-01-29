@@ -2,20 +2,21 @@
 
 #include <iostream>
 
-bool helloRoute(csd::Request& req, csd::Response& res) {
-	if (req.getField("name") != "") {
-		return csd::ResponseFactory::text(res, "Hello, "+req.getField("name"));
-	}
-
-	return csd::ResponseFactory::sendFile(res, "Static/hello.css");
+void fileRoute(csd::Request& req, csd::Response& res) {
+	csd::ResponseFactory::sendFile(res, "Static/hello.css");
 }
 
-bool getFormRoute(csd::Request& req, csd::Response& res) {
-	return csd::ResponseFactory::sendFile(res, "Static/form.html");
+void getFormRoute(csd::Request& req, csd::Response& res) {
+	csd::ResponseFactory::sendFile(res, "Static/form.html");
 }
 
-bool postFormRoute(csd::Request& req, csd::Response& res) {
-	return csd::ResponseFactory::text(res, req.getField("name")+", your text: "+req.getField("text"));
+void postFormRoute(csd::Request& req, csd::Response& res) {
+	csd::ResponseFactory::text(res, req.getField("name")+", your text: "+req.getField("text"));
+}
+
+bool myMiddleware(csd::Request& req, csd::Response& res) {
+	std::cout << "Middleware request: " << req.getPath() << std::endl;
+	return true;
 }
 
 bool faviconRoute(csd::Request& req, csd::Response& res) {
@@ -27,9 +28,13 @@ bool faviconRoute(csd::Request& req, csd::Response& res) {
 int main(int argc, char* argv[]) {
 	csd::Application app;
 
-	app.route(csd::Methods::Get, "/hello", helloRoute);
+	app.use(myMiddleware);
+
+	app.route(csd::Methods::Get, "/file", fileRoute);
+
 	app.route(csd::Methods::Get, "/form", getFormRoute);
 	app.route(csd::Methods::Post, "/form", postFormRoute);
+
 	app.route(csd::Methods::Get, "/favicon.ico", faviconRoute);
 
 	app.listen(1234);

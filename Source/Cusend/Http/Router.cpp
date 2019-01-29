@@ -18,6 +18,22 @@ void csd::Router::addRoute(csd::Route& route) {
 	m_routes.push_back(route);
 }
 
+void csd::Router::addMiddleware(csd::MiddlewareHandler& func) {
+	m_middlewares.push_back(func);
+}
+
+bool csd::Router::processMiddlewares(csd::Request & req, csd::Response & res) {
+	for (std::size_t i = 0; i < m_middlewares.size(); i++) {
+		MiddlewareHandler& mdlw = m_middlewares[i];
+
+		bool retVal = mdlw(req, res);
+
+		if (!retVal) return false;
+	}
+
+	return true;
+}
+
 csd::Route* csd::Router::findMatchingRoute(csd::Request& req) {
 	for (std::size_t i = 0; i < m_routes.size(); i++) {
 		Route& route = m_routes[i];

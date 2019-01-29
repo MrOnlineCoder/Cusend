@@ -24,7 +24,7 @@ csd::Application::Application() {
 }
 
 csd::Application::~Application() {
-
+	instance = NULL;
 }
 
 void csd::Application::route(const std::string& method, const std::string& uri, RouteHandler handler) {
@@ -34,6 +34,10 @@ void csd::Application::route(const std::string& method, const std::string& uri, 
 	r.handler = handler;
 
 	m_router.addRoute(r);
+}
+
+void csd::Application::use(MiddlewareHandler handler) {
+	m_router.addMiddleware(handler);
 }
 
 bool csd::Application::listen(uint16_t port) {
@@ -107,14 +111,20 @@ void csd::Application::processClient(NetworkClient* client) {
 	m_parser.clear();
 	m_parser.parse(buffer, requestObj);
 
-	//Find the route and give control to user code
-	csd::Route* routePtr = m_router.findMatchingRoute(requestObj);
+	//Execute middlewares
+	bool shouldExecuteRoute = m_router.processMiddlewares(requestObj, responseObj);
 
-	if (routePtr != NULL) {
-		routePtr->handler(requestObj, responseObj);
-	} else {
-		//ExpressJS-style error
-		csd::ResponseFactory::text(responseObj, "Cannot " + requestObj.m_method + " " + requestObj.m_url);
+	//Find the route and give control to user code
+	if (shouldExecuteRoute) {
+		csd::Route* routePtr = m_router.findMatchingRoute(requestObj);
+
+		if (routePtr != NULL) {
+			routePtr->handler(requestObj, responseObj);
+		}
+		else {
+			//ExpressJS-style error
+			csd::ResponseFactory::text(responseObj, "Cannot " + requestObj.m_method + " " + requestObj.m_url);
+		}
 	}
 
 	//Generate the response data
