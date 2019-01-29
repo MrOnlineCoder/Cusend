@@ -29,7 +29,7 @@ Browsing to localhost:3000/hello in your favourite browser will show "Hello Worl
 ## TODO
 * ~~GET params parsing~~
 * ~~POST params parsing~~
-* URL encoding/decoding
+* ~~URL encoding/decoding~~
 * multipart/form-data POST body parsing
 * URI params parsing (e.g. GET /article/:articleID)
 * Cookie management

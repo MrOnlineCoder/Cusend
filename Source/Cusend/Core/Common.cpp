@@ -19,3 +19,38 @@ std::string csd::toUpperCase(std::string & str) {
 
 	return res;
 }
+
+std::string csd::decodeURI(std::string & uri) {
+	std::string s;
+
+	for (std::size_t i = 0; i < uri.size(); i++) {
+		char c = uri[i];
+		
+		if (c == '+') {
+			s.push_back(' ');
+			continue;
+		}
+
+		if (c == '%') {
+			if (i + 2 > uri.size()) {
+				continue;
+			}
+
+			char hex[3];
+
+			hex[0] = uri[++i];
+			hex[1] = uri[++i];
+			hex[2] = '\0';
+
+			char newChar = (char)(int) strtol(hex, NULL, 16);
+
+			s.push_back(newChar);
+			continue;
+		}
+
+		s.push_back(c);
+	}
+
+
+	return s;
+}

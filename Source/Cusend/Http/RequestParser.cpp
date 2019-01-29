@@ -203,7 +203,7 @@ void csd::RequestParser::parseFields(csd::Request & target, const std::string & 
 		char c = str[i];
 
 		if (c == '&') {
-			target.m_fields.insert(std::make_pair(field, value));
+			target.m_fields.insert(std::make_pair(field, csd::decodeURI(value)));
 			field = "";
 			value = "";
 			isFieldSet = false;
@@ -222,5 +222,5 @@ void csd::RequestParser::parseFields(csd::Request & target, const std::string & 
 		}
 	}
 
-	target.m_fields.insert(std::make_pair(field, value));
+	target.m_fields.insert(std::make_pair(field, csd::decodeURI(value)));
 }

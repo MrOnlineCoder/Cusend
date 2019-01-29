@@ -18,6 +18,7 @@
 
 namespace csd {
 	std::string toUpperCase(std::string& str);
+	std::string decodeURI(std::string& uri);
 }
 
 #endif // !CSD_COMMON_H
